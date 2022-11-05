@@ -56,14 +56,9 @@ input:placeholder-shown {
 }
 
 .close {
-  color: red;
-  position: relative;
-  left: -7px;
-  opacity: 0;
+  display: none;
 }
 
-.close:hover {
-  color: red;
-  opacity: 1;
-  background-color: #fff;
+.fa-ellipsis-v {
+  cursor: pointer;
 }
