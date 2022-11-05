@@ -23,6 +23,12 @@ export default class AddRemove {
     this.store();
   }
 
+  clear() {
+    this.items = this.items.filter((e) => !e.isDone);
+    this.setIndex();
+    this.store();
+  }
+
   remove(item) {
     this.items = this.items.filter((e) => e.id !== item.id);
     this.setIndex();

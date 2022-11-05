@@ -1,7 +1,9 @@
 import AddRemove from '../modules/add-remove';
 import Lists from '../modules/lists';
 import './style.css';
+import Updates from '../modules/updates';
 
+const updates = new Updates();
 const addRemove = new AddRemove();
 
 const order = (a, b) => a.index - b.index;
@@ -19,25 +21,9 @@ const logList = () => {
     child.className = 'form-check-input pull-left';
     child.style.marginRight = '12px';
     child.checked = item.isDone;
-    child.addEventListener('change', (e) => {
-      if (e.currentTarget.checked) item.done(true);
-      else item.done(false);
-      addRemove.edit(item);
+    child.addEventListener('change', (event) => {
+      updates.update(event, item);
     });
-
-    const close = document.createElement('button');
-    close.appendChild(document.createTextNode('X'));
-    close.className = 'close';
-    close.addEventListener('click', (e) => {
-      e.preventDefault();
-      addRemove.remove(item);
-      logList();
-    });
-
-    const section = document.createElement('section');
-    section.className = 'fas fa-ellipsis-v pull-right';
-
-    lists.appendChild(child);
 
     const txt = document.createElement('span');
     txt.setAttribute('contenteditable', 'true');
@@ -52,9 +38,23 @@ const logList = () => {
       }
     });
 
-    lists.appendChild(txt);
-    lists.appendChild(close);
-    lists.appendChild(section);
+    const close = document.createElement('span');
+    close.className = 'fa fa-trash-o pull-right close';
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      addRemove.remove(item);
+      logList();
+    });
+
+    const ellipsis = document.createElement('span');
+    ellipsis.className = 'fas fa-ellipsis-v pull-right';
+    ellipsis.addEventListener('click', (event) => {
+      event.preventDefault();
+      ellipsis.style = 'display:none';
+      close.style = 'display: block';
+    });
+
+    lists.append(child, txt, close, ellipsis);
 
     dash.appendChild(lists);
   });
@@ -73,11 +73,7 @@ const logList = () => {
 
   document.getElementById('complete').addEventListener('click', (event) => {
     event.preventDefault();
-    addRemove.items.forEach((item) => {
-      if (item.isDone) {
-        addRemove.remove(item);
-      }
-    });
+    addRemove.clear();
     logList();
   });
 };
