@@ -3,7 +3,6 @@ import Lists from '../modules/lists';
 import './style.css';
 import Updates from '../modules/updates';
 
-const updates = new Updates();
 const addRemove = new AddRemove();
 
 const order = (a, b) => a.index - b.index;
@@ -22,7 +21,7 @@ const logList = () => {
     child.style.marginRight = '12px';
     child.checked = item.isDone;
     child.addEventListener('change', (event) => {
-      updates.update(event, item);
+      new Updates().update(event, item);
     });
 
     const txt = document.createElement('span');
