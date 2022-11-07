@@ -1,7 +1,7 @@
+import Updates from '../modules/updates';
 import AddRemove from '../modules/add-remove';
 import Lists from '../modules/lists';
 import './style.css';
-import Updates from '../modules/updates';
 
 const addRemove = new AddRemove();
 
@@ -13,10 +13,10 @@ const logList = () => {
   addRemove.items.sort(order).forEach((item) => {
     const lists = document.createElement('li');
     lists.className = 'list-group-item d-flex justify-content-between align-items-center';
+
     const child = document.createElement('input');
     child.type = 'checkbox';
     child.name = 'name';
-
     child.className = 'form-check-input pull-left';
     child.style.marginRight = '12px';
     child.checked = item.isDone;
