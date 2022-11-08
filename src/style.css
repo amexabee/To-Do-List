@@ -45,7 +45,7 @@ input:placeholder-shown {
   margin: 20px auto;
 }
 
-[contenteditable="true"]#dash {
+[contenteditable='true']#dash {
   white-space: nowrap;
   overflow: hidden;
   padding: 7px;

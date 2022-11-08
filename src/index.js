@@ -12,7 +12,8 @@ const logList = () => {
   dash.innerHTML = '';
   addRemove.items.sort(order).forEach((item) => {
     const lists = document.createElement('li');
-    lists.className = 'list-group-item d-flex justify-content-between align-items-center';
+    lists.className =
+      'list-group-item d-flex justify-content-between align-items-center';
 
     const child = document.createElement('input');
     child.type = 'checkbox';
