@@ -36,6 +36,11 @@ input:placeholder-shown {
   border-radius: 0;
 }
 
+.d-flex {
+  justify-content: space-between;
+  align-items: center;
+}
+
 .btn {
   border-radius: 0;
   padding: 15px;
