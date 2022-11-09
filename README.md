@@ -26,7 +26,7 @@ Feel free to get a local copy up and running by following these simple example s
 👤 **Author1**
 
 - GitHub: [@amexabee](https://github.com/amexabee)
-- Twitter: [@fountfillwblood](https://twitter.com/fountfillwblood)
+- Twitter: [@fountfillwblood](https://twitter.com/@i_amanuel)
 - LinkedIn: [Amanuel Galema](https://www.linkedin.com/in/amanuel-galema/)
 
 
