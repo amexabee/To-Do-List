@@ -39,12 +39,12 @@ export default class AddRemove {
     localStorage.setItem('ToDoList', JSON.stringify(this.items));
   }
 
-  order(a, b) {
-    return a.id - b.id;
-  }
+  // order(a, b) {
+  //   return a.id - b.id;
+  // }
 
   setIndex() {
-    const sorted = this.items.sort(this.order);
+    const sorted = this.items.sort((a, b) => a.id - b.id);
     sorted.forEach((task, index) => {
       task.index = index;
     });
