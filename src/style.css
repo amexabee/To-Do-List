@@ -54,7 +54,7 @@ input:placeholder-shown {
   white-space: nowrap;
   overflow: hidden;
   padding: 7px;
-  outline: 0px solid transparent;
+  outline: 0 solid transparent;
 }
 
 #complete {
