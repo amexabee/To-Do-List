@@ -1,5 +1,6 @@
 import AddRemove from './add-remove';
 import Lists from './lists';
+
 const addRemove = new AddRemove();
 
 describe('test add-remove', () => {
