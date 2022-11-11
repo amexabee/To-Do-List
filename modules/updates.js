@@ -6,8 +6,11 @@ export default class Updates {
   }
 
   update(event, item) {
-    if (event.currentTarget.checked) item.done(true);
-    else item.done(false);
+    if (event.currentTarget.checked) {
+      item.done(true);
+    } else {
+      item.done(false);
+    }
     this.addRemove.edit(item);
   }
 }
