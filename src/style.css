@@ -48,6 +48,7 @@ input:placeholder-shown {
 
 #refresh {
   margin: 20px auto;
+  cursor: pointer;
 }
 
 [contenteditable='true']#dash {
@@ -63,6 +64,12 @@ input:placeholder-shown {
 
 .close {
   display: none;
+  color: red !important;
+  opacity: 1;
+}
+
+.close:hover {
+  opacity: 1;
 }
 
 .fa-ellipsis-v {

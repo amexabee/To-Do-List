@@ -79,6 +79,11 @@ const logList = () => {
     addRemove.clear();
     logList();
   });
+
+  document.getElementById('refresh').addEventListener('click', () => {
+    addRemove.clearAll();
+    logList();
+  });
 };
 
 logList();
