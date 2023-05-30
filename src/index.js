@@ -4,6 +4,8 @@ import Lists from '../modules/lists';
 import './style.css';
 
 const addRemove = new AddRemove();
+const checked = 'list-group-item d-flex cancel';
+const unchecked = 'list-group-item d-flex';
 
 const logList = () => {
   const dash = document.getElementById('dashboard');
@@ -12,7 +14,7 @@ const logList = () => {
     .sort((a, b) => a.index - b.index)
     .forEach((item) => {
       const lists = document.createElement('li');
-      lists.className = 'list-group-item d-flex';
+      lists.className = item.isDone ? checked : unchecked;
 
       const child = document.createElement('input');
       child.type = 'checkbox';
@@ -20,7 +22,9 @@ const logList = () => {
       child.className = 'form-check-input pull-left';
       child.style.marginRight = '12px';
       child.checked = item.isDone;
+
       child.addEventListener('change', (event) => {
+        lists.className = item.isDone ? unchecked : checked;
         new Updates().update(event, item);
       });
 

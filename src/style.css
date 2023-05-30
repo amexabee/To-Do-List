@@ -68,3 +68,7 @@ input:placeholder-shown {
 .fa-ellipsis-v {
   cursor: pointer;
 }
+
+.cancel {
+  text-decoration: line-through;
+}
