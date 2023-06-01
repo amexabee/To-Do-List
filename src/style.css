@@ -7,6 +7,11 @@ body {
   box-shadow: none !important;
 }
 
+*:checked + span,
+.cancel {
+  text-decoration: line-through;
+}
+
 #task {
   padding: 20px;
 }
@@ -66,10 +71,6 @@ input:placeholder-shown {
 .fa-trash-o {
   margin-left: auto;
   cursor: pointer;
-}
-
-.cancel {
-  text-decoration: line-through;
 }
 
 input[type='checkbox'] {

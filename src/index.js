@@ -1,4 +1,3 @@
-import Updates from '../modules/updates';
 import AddRemove from '../modules/add-remove';
 import Lists from '../modules/lists';
 import './style.css';
@@ -7,7 +6,19 @@ const addRemove = new AddRemove();
 const checked = 'list-group-item d-flex align-items-center border-bottom';
 const unchecked = 'list-group-item d-flex align-items-center border-bottom';
 
+const todos = [
+  { task: ' a basic todo list app' },
+  { task: 'made with ❤️ by Amanuel' },
+  { task: '——— enjoy 🔥 ———' },
+];
+
 const logList = () => {
+  if (!JSON.parse(localStorage.getItem('ToDoList'))) {
+    todos.forEach((todo) => {
+      addRemove.add(new Lists(todo.task, true));
+    });
+  }
+
   const dash = document.getElementById('dashboard');
   dash.innerHTML = '';
   addRemove.items
@@ -15,6 +26,8 @@ const logList = () => {
     .forEach((item) => {
       const lists = document.createElement('li');
       lists.className = item.isDone ? checked : unchecked;
+
+      const old = { ...item };
 
       const child = document.createElement('input');
       child.type = 'checkbox';
@@ -26,7 +39,8 @@ const logList = () => {
       child.addEventListener('change', (event) => {
         lists.className = item.isDone ? unchecked : checked;
         event.target.nextElementSibling.className = item.isDone ? '' : 'cancel';
-        new Updates().update(event, item);
+        item.isDone = !item.isDone;
+        addRemove.edit(old, item);
       });
 
       const txt = document.createElement('span');
@@ -34,8 +48,10 @@ const logList = () => {
       txt.appendChild(document.createTextNode(item.task));
       txt.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-          item.newTask(txt.innerText);
-          addRemove.edit(item);
+          txt.setAttribute('contenteditable', 'false');
+          txt.setAttribute('contenteditable', 'true');
+          item.task = txt.innerText;
+          addRemove.edit(old, item);
         }
       });
 
@@ -81,7 +97,7 @@ const logList = () => {
   document.getElementById('refresh').addEventListener('click', function () {
     let element = this;
     this.classList.add('reset');
-    addRemove.clearAll();
+    addRemove.reset(todos);
     setTimeout(function () {
       element.classList.remove('reset');
     }, 1000);

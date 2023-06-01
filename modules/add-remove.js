@@ -4,51 +4,44 @@ import Lists from './lists';
 export default class AddRemove {
   constructor() {
     this.items = [];
+
     if (JSON.parse(localStorage.getItem('ToDoList'))) {
-      JSON.parse(localStorage.getItem('ToDoList')).forEach((element) => {
-        this.items.push(Object.assign(new Lists(), element));
+      JSON.parse(localStorage.getItem('ToDoList')).forEach((item) => {
+        this.items.push({ ...item });
       });
     }
   }
 
   add(item) {
-    item.newIndex(this.items.length);
     this.items.push(item);
     this.store();
   }
 
-  edit(item) {
-    const index = this.items.findIndex((e) => e.id === item.id);
+  edit(old, item) {
+    const index = this.items.findIndex((i) => i.id === old.id);
     this.items[index] = item;
     this.store();
   }
 
   clear() {
     this.items = this.items.filter((e) => !e.isDone);
-    this.setIndex();
     this.store();
   }
 
-  clearAll() {
+  reset(todos) {
     this.items = [];
+    todos.forEach((todo) => {
+      this.add(new Lists(todo.task, true));
+    });
     this.store();
   }
 
   remove(item) {
     this.items = this.items.filter((e) => e.id !== item.id);
-    this.setIndex();
     this.store();
   }
 
   store() {
     localStorage.setItem('ToDoList', JSON.stringify(this.items));
-  }
-
-  setIndex() {
-    const sorted = this.items.sort((a, b) => a.id - b.id);
-    sorted.forEach((task, index) => {
-      task.index = index;
-    });
-    this.items = sorted;
   }
 }
