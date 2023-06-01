@@ -4,8 +4,8 @@ import Lists from '../modules/lists';
 import './style.css';
 
 const addRemove = new AddRemove();
-const checked = 'list-group-item d-flex cancel';
-const unchecked = 'list-group-item d-flex';
+const checked = 'list-group-item d-flex align-items-center border-bottom';
+const unchecked = 'list-group-item d-flex align-items-center border-bottom';
 
 const logList = () => {
   const dash = document.getElementById('dashboard');
@@ -19,30 +19,28 @@ const logList = () => {
       const child = document.createElement('input');
       child.type = 'checkbox';
       child.name = 'name';
-      child.className = 'form-check-input pull-left';
+      child.className = 'form-check-input';
       child.style.marginRight = '12px';
       child.checked = item.isDone;
 
       child.addEventListener('change', (event) => {
         lists.className = item.isDone ? unchecked : checked;
+        event.target.nextElementSibling.className = item.isDone ? '' : 'cancel';
         new Updates().update(event, item);
       });
 
       const txt = document.createElement('span');
       txt.setAttribute('contenteditable', 'true');
-      txt.setAttribute('id', 'dash');
       txt.appendChild(document.createTextNode(item.task));
       txt.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           item.newTask(txt.innerText);
           addRemove.edit(item);
-          txt.setAttribute('contenteditable', 'false');
-          txt.setAttribute('contenteditable', 'true');
         }
       });
 
       const close = document.createElement('span');
-      close.className = 'fa fa-trash-o pull-right close';
+      close.className = 'fa fa-trash-o close';
       close.addEventListener('click', (e) => {
         e.preventDefault();
         addRemove.remove(item);
@@ -50,7 +48,7 @@ const logList = () => {
       });
 
       const ellipsis = document.createElement('span');
-      ellipsis.className = 'fas fa-ellipsis-v pull-right';
+      ellipsis.className = 'fas fa-ellipsis-v';
       ellipsis.addEventListener('click', (event) => {
         event.preventDefault();
         ellipsis.style = 'display:none';
@@ -80,8 +78,13 @@ const logList = () => {
     logList();
   });
 
-  document.getElementById('refresh').addEventListener('click', () => {
+  document.getElementById('refresh').addEventListener('click', function () {
+    let element = this;
+    this.classList.add('reset');
     addRemove.clearAll();
+    setTimeout(function () {
+      element.classList.remove('reset');
+    }, 1000);
     logList();
   });
 };
