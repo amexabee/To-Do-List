@@ -12,6 +12,10 @@ body {
   text-decoration: line-through;
 }
 
+.custom-bg {
+  background-color: #fce9b3;
+}
+
 #task {
   padding: 20px;
 }

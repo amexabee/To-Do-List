@@ -43,15 +43,34 @@ const logList = () => {
         addRemove.edit(old, item);
       });
 
+      lists.addEventListener('click', () => {
+        lists.classList.add('custom-bg');
+        ellipsis.style = 'display:none';
+        close.style = 'display: block';
+      });
+
       const txt = document.createElement('span');
       txt.setAttribute('contenteditable', 'true');
       txt.appendChild(document.createTextNode(item.task));
+      txt.addEventListener('focus', () => {
+        lists.classList.add('custom-bg');
+      });
       txt.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
+          lists.classList.remove('custom-bg');
           txt.setAttribute('contenteditable', 'false');
           txt.setAttribute('contenteditable', 'true');
           item.task = txt.innerText;
           addRemove.edit(old, item);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target !== txt && target !== lists) {
+          lists.classList.remove('custom-bg');
+          ellipsis.style = 'display:block';
+          close.style = 'display: none';
         }
       });
 
@@ -67,8 +86,6 @@ const logList = () => {
       ellipsis.className = 'fas fa-ellipsis-v';
       ellipsis.addEventListener('click', (event) => {
         event.preventDefault();
-        ellipsis.style = 'display:none';
-        close.style = 'display: block';
       });
 
       lists.append(child, txt, close, ellipsis);
