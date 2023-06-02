@@ -84,12 +84,12 @@ input:placeholder-shown {
   width: 60px;
 }
 
-.ellipsis-container:hover .fa-ellipsis-v {
-  color: #222;
-}
-
 .fa-ellipsis-v {
   color: #777;
+}
+
+.ellipsis-container:hover .fa-ellipsis-v {
+  color: #222;
 }
 
 .fa-trash-o {

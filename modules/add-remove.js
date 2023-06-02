@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import Lists from './lists';
 
 export default class AddRemove {
@@ -42,7 +41,7 @@ export default class AddRemove {
   }
 
   order(start, end) {
-    let temp = this.items[start];
+    const temp = this.items[start];
     this.items[start] = this.items[end];
     this.items[end] = temp;
     this.store();

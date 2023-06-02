@@ -1,6 +1,7 @@
+/* eslint-disable no-new */
+import Sortable from 'sortablejs';
 import AddRemove from '../modules/add-remove';
 import Lists from '../modules/lists';
-import Sortable from 'sortablejs';
 import './style.css';
 
 const addRemove = new AddRemove();
@@ -43,12 +44,6 @@ const logList = () => {
         addRemove.edit(old, item);
       });
 
-      lists.addEventListener('click', () => {
-        lists.classList.add('custom-bg');
-        ellipsis.style = 'display:none';
-        close.style = 'display: block';
-      });
-
       const txt = document.createElement('span');
       txt.setAttribute('contenteditable', 'true');
       txt.appendChild(document.createTextNode(item.task));
@@ -62,15 +57,6 @@ const logList = () => {
           txt.setAttribute('contenteditable', 'true');
           item.task = txt.innerText;
           addRemove.edit(old, item);
-        }
-      });
-
-      document.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target !== txt && target !== lists) {
-          lists.classList.remove('custom-bg');
-          ellipsis.style = 'display:block';
-          close.style = 'display: none';
         }
       });
 
@@ -88,6 +74,21 @@ const logList = () => {
       ellipsis.className = 'fas fa-ellipsis-v';
       ellipsis.addEventListener('click', (event) => {
         event.preventDefault();
+      });
+
+      document.addEventListener('click', (e) => {
+        const { target } = e;
+        if (target !== txt && target !== lists) {
+          lists.classList.remove('custom-bg');
+          ellipsis.style = 'display:block';
+          close.style = 'display: none';
+        }
+      });
+
+      lists.addEventListener('click', () => {
+        lists.classList.add('custom-bg');
+        ellipsis.style = 'display:none';
+        close.style = 'display: block';
       });
 
       ellipsisContainer.appendChild(ellipsis);
@@ -115,29 +116,32 @@ const logList = () => {
     logList();
   });
 
-  document.getElementById('refresh').addEventListener('click', function () {
-    let element = this;
-    this.classList.add('reset');
-    addRemove.reset(todos);
-    setTimeout(function () {
-      element.classList.remove('reset');
-    }, 1000);
-    logList();
-  });
+  document
+    .getElementById('refresh')
+    .addEventListener('click', function reset() {
+      const element = this;
+      this.classList.add('reset');
+      addRemove.reset(todos);
+      setTimeout(() => {
+        element.classList.remove('reset');
+      }, 1000);
+      logList();
+    });
 
-  let start, end;
+  let start;
+  let end;
 
-  new Sortable(dashboard, {
+  new Sortable(dash, {
     handle: '.ellipsis-container',
     animation: 150,
-    onStart: function (e) {
-      const item = e.item;
-      const items = Array.from(dashboard.children);
+    onStart(e) {
+      const { item } = e;
+      const items = Array.from(dash.children);
       start = items.indexOf(item);
     },
-    onEnd: function (e) {
-      const item = e.item;
-      const items = Array.from(dashboard.children);
+    onEnd(e) {
+      const { item } = e;
+      const items = Array.from(dash.children);
       end = items.indexOf(item);
       addRemove.order(start, end);
     },
