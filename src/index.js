@@ -12,7 +12,6 @@ const todos = [
   { task: 'made with ❤️ by Amanuel' },
   { task: '——— enjoy 🔥 ———' },
 ];
-
 const logList = () => {
   if (!JSON.parse(localStorage.getItem('ToDoList'))) {
     todos.forEach((todo) => {
@@ -131,7 +130,6 @@ const logList = () => {
   new Sortable(dashboard, {
     handle: '.ellipsis-container',
     animation: 150,
-    forceFallback: true, // IDK all what this line does but it keeps the cursor as 'move'
     onStart: function (e) {
       const item = e.item;
       const items = Array.from(dashboard.children);
