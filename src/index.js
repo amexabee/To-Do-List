@@ -129,13 +129,14 @@ const logList = () => {
   let start, end;
 
   new Sortable(dashboard, {
+    handle: '.ellipsis-container',
+    animation: 150,
+    forceFallback: true, // IDK all what this line does but it keeps the cursor as 'move'
     onStart: function (e) {
       const item = e.item;
       const items = Array.from(dashboard.children);
       start = items.indexOf(item);
     },
-    handle: '.ellipsis-container',
-    animation: 150,
     onEnd: function (e) {
       const item = e.item;
       const items = Array.from(dashboard.children);
