@@ -1,5 +1,9 @@
 body {
-  background-color: #f6f6f6;
+  background-color: mistyrose;
+}
+
+.elegant-font {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 *:focus {
@@ -13,7 +17,7 @@ body {
 }
 
 .custom-bg {
-  background-color: #fce9b3;
+  background-color: hsl(39, 88%, 87%);
 }
 
 #task {
@@ -26,7 +30,7 @@ body {
 }
 
 .container {
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 input:placeholder-shown {
