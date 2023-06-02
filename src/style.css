@@ -71,10 +71,30 @@ input:placeholder-shown {
   opacity: 1;
 }
 
-.fa-ellipsis-v,
-.fa-trash-o {
+.ellipsis-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
   margin-left: auto;
+  cursor: move;
+  width: 60px;
+}
+
+.ellipsis-container:hover .fa-ellipsis-v {
+  color: #222;
+}
+
+.fa-ellipsis-v {
+  color: #777;
+}
+
+.fa-trash-o {
   cursor: pointer;
+  margin-left: auto;
 }
 
 input[type='checkbox'] {

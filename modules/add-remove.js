@@ -41,6 +41,13 @@ export default class AddRemove {
     this.store();
   }
 
+  order(start, end) {
+    let temp = this.items[start];
+    this.items[start] = this.items[end];
+    this.items[end] = temp;
+    this.store();
+  }
+
   store() {
     localStorage.setItem('ToDoList', JSON.stringify(this.items));
   }

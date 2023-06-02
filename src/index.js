@@ -1,5 +1,6 @@
 import AddRemove from '../modules/add-remove';
 import Lists from '../modules/lists';
+import Sortable from 'sortablejs';
 import './style.css';
 
 const addRemove = new AddRemove();
@@ -82,13 +83,17 @@ const logList = () => {
         logList();
       });
 
-      const ellipsis = document.createElement('span');
+      const ellipsisContainer = document.createElement('span');
+      ellipsisContainer.className = 'ellipsis-container';
+      const ellipsis = document.createElement('i');
       ellipsis.className = 'fas fa-ellipsis-v';
       ellipsis.addEventListener('click', (event) => {
         event.preventDefault();
       });
 
-      lists.append(child, txt, close, ellipsis);
+      ellipsisContainer.appendChild(ellipsis);
+
+      lists.append(child, txt, close, ellipsisContainer);
 
       dash.appendChild(lists);
     });
@@ -119,6 +124,24 @@ const logList = () => {
       element.classList.remove('reset');
     }, 1000);
     logList();
+  });
+
+  let start, end;
+
+  new Sortable(dashboard, {
+    onStart: function (e) {
+      const item = e.item;
+      const items = Array.from(dashboard.children);
+      start = items.indexOf(item);
+    },
+    handle: '.ellipsis-container',
+    animation: 150,
+    onEnd: function (e) {
+      const item = e.item;
+      const items = Array.from(dashboard.children);
+      end = items.indexOf(item);
+      addRemove.order(start, end);
+    },
   });
 };
 
