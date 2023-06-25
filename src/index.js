@@ -1,4 +1,3 @@
-/* eslint-disable no-new */
 import Sortable from 'sortablejs';
 import AddRemove from '../modules/add-remove';
 import Lists from '../modules/lists';
@@ -131,21 +130,21 @@ const logList = () => {
   let start;
   let end;
 
-  new Sortable(dash, {
+  const sortable = new Sortable(dash, {
     handle: '.ellipsis-container',
     animation: 150,
-    onStart(e) {
-      const { item } = e;
-      const items = Array.from(dash.children);
-      start = items.indexOf(item);
-    },
-    onEnd(e) {
-      const { item } = e;
-      const items = Array.from(dash.children);
-      end = items.indexOf(item);
-      addRemove.order(start, end);
-    },
   });
+
+  sortable.onStart = ({ item }) => {
+    const items = Array.from(dash.children);
+    start = items.indexOf(item);
+  };
+
+  sortable.onEnd = ({ item }) => {
+    const items = Array.from(dash.children);
+    end = items.indexOf(item);
+    addRemove.order(start, end);
+  };
 };
 
 logList();
